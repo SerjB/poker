@@ -141,7 +141,7 @@ describe Hand do
     context 'Given AD, 2D, 3D, 4D, 5D, 9D, 8D' do
       it 'return false' do
         a = Hand.new([Card.new('A', 'D'), Card.new('2', 'D'),
-                      Card.new('3', 'D'), Card.new('5', 'D'),
+                      Card.new('K', 'D'), Card.new('5', 'D'),
                       Card.new('9', 'D'), Card.new('4', 'D'),
                       Card.new('8', 'D')])
         expect(a.straight_flush).to eql(false)

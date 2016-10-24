@@ -9,6 +9,6 @@ class Card
   end
 
   def to_s
-    "#{@rank + @suit} "
+    "#{@rank}#{suit} "
   end
 end
