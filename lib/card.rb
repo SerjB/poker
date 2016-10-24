@@ -1,14 +1,14 @@
-# Generating cards for deck with 2 fields :tunk and :suit
+# Generating cards for deck with 2 fields :runk and :suit
 class Card
-  attr_accessor :runk,
+  attr_accessor :rank,
                 :suit
 
-  def initialize(runk, suit)
-    @runk = runk
+  def initialize(rank, suit)
+    @rank = rank
     @suit = suit
   end
 
   def to_s
-    "#{@runk + @suit} "
+    "#{@rank + @suit} "
   end
 end

@@ -3,7 +3,7 @@ require_relative 'card.rb'
 
 #
 class Deck
-  AVAILABLE_RUNKS = (('2'..'10').to_a << %w(J Q K A)).flatten
+  AVAILABLE_RANKS = (('2'..'10').to_a << %w(J Q K A)).flatten
   AVAILABLE_SUITS = %w(H S C D).freeze
 
   attr_reader :deck
@@ -13,7 +13,7 @@ class Deck
   end
 
   def deck_of_cards
-    cards = AVAILABLE_RUNKS.product(AVAILABLE_SUITS).map(&:join).shuffle
+    cards = AVAILABLE_RANKS.product(AVAILABLE_SUITS).map(&:join).shuffle
     cards = cards.map { |e| Card.new(e[0], e[1]) }
     cards.shuffle
   end
