@@ -13,9 +13,9 @@ class Deck
   end
 
   def deck_of_cards
-    cards = AVAILABLE_RANKS.product(AVAILABLE_SUITS).map(&:join).shuffle
+    cards = AVAILABLE_RANKS.product(AVAILABLE_SUITS).map(&:join)
     cards = cards.map { |e| Card.new(e[0], e[1]) }
-    cards.shuffle
+    cards
   end
 
   def start_game
