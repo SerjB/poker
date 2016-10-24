@@ -20,16 +20,16 @@ class Deck
 
   def start_game
     puts 'Your cards :'
-    user_cards = pick_and_remuve_card(2)
+    user_cards = pick_and_remove_card(2)
     puts user_cards
     puts 'Cards on the dask :'
-    desk_cards = pick_and_remuve_card(5)
+    desk_cards = pick_and_remove_card(5)
     puts desk_cards
     puts 'Win combination :'
     puts Hand.new(user_cards + desk_cards).win_combination
   end
 
-  def pick_and_remuve_card(amount)
+  def pick_and_remove_card(amount)
     picked_cards = @deck.sample(amount)
     @deck -= picked_cards
     picked_cards
