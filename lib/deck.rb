@@ -13,8 +13,7 @@ class Deck
   end
 
   def deck_of_cards
-    RANKS.product(SUITS).map(&:join)
-                   .map { |e| Card.new(e[0], e[1]) }
+    RANKS.product(SUITS).map { |e| Card.new(e[0], e[1]) }
   end
 
   def start_game
