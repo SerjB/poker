@@ -13,16 +13,15 @@ class Deck
   end
 
   def deck_of_cards
-    cards = AVAILABLE_RANKS.product(AVAILABLE_SUITS).map(&:join)
-    cards = cards.map { |e| Card.new(e[0], e[1]) }
-    cards
+    AVAILABLE_RANKS.product(AVAILABLE_SUITS).map(&:join)
+                   .map { |e| Card.new(e[0], e[1]) }
   end
 
   def start_game
     puts 'Your cards :'
     user_cards = pick_and_remove_card(2)
     puts user_cards
-    puts 'Cards on the dask :'
+    puts 'Cards on the table :'
     desk_cards = pick_and_remove_card(5)
     puts desk_cards
     puts 'Win combination :'

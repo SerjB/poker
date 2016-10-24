@@ -4,8 +4,7 @@ class Hand
   COMBINATIONS = [:high_card, :one_pair, :two_pairs, :three_of_a_kind,
                   :straight, :flash, :full_house, :four_of_a_kind,
                   :straight_flush, :royal_flush].reverse
-  RANKS_STRAIGHT = (('2'..'10').to_a << %w(J Q K A)).flatten
-  RANKS_STRAIGHT.unshift('A')
+  RANKS_STRAIGHT = (('2'..'10').to_a << %w(J Q K A)).flatten.unshift('A')
 
   attr_accessor :cards
 
