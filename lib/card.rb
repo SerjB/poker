@@ -1,4 +1,4 @@
-# Generating cards for deck with 2 fields :runk and :suit
+# Generating cards for deck with 2 fields :rank and :suit
 class Card
   attr_accessor :rank,
                 :suit
