@@ -1,10 +1,10 @@
-require_relative 'hand.rb' # path for app
+require_relative 'hand.rb'
 require_relative 'card.rb'
 
 #
 class Deck
-  AVAILABLE_RANKS = (('2'..'10').to_a << %w(J Q K A)).flatten
-  AVAILABLE_SUITS = %w(H S C D).freeze
+  RANKS = (('2'..'10').to_a << %w(J Q K A)).flatten
+  SUITS = %w(H S C D).freeze
 
   attr_reader :deck
 
@@ -13,7 +13,7 @@ class Deck
   end
 
   def deck_of_cards
-    AVAILABLE_RANKS.product(AVAILABLE_SUITS).map(&:join)
+    RANKS.product(SUITS).map(&:join)
                    .map { |e| Card.new(e[0], e[1]) }
   end
 

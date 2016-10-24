@@ -1,6 +1,5 @@
 require_relative 'card.rb'
-# Check all combinations, return win combination
-# and print cards of it combination
+#
 class Hand
   COMBINATIONS = [:high_card, :one_pair, :two_pairs, :three_of_a_kind,
                   :straight, :flash, :full_house, :four_of_a_kind,
@@ -68,7 +67,7 @@ class Hand
   end
 
   def flash
-    Deck::AVAILABLE_SUITS.reverse.each do |s|
+    Deck::SUITS.reverse.each do |s|
       if @cards.find_all { |obj| obj.suit == s }.count >= 5
         @combo_win = @cards.find_all { |obj| obj.suit == s }
         return true
@@ -96,7 +95,7 @@ class Hand
   end
 
   def straight_flush
-    Deck::AVAILABLE_SUITS.reverse.each do |s|
+    Deck::SUITS.reverse.each do |s|
       @combo_win = []
       RANKS_STRAIGHT.reverse.each do |r|
         if @cards.find_all { |obj| obj.rank == r && obj.suit == s }.count > 0
@@ -111,9 +110,9 @@ class Hand
   end
 
   def royal_flush
-    Deck::AVAILABLE_SUITS.reverse.each do |s|
+    Deck::SUITS.reverse.each do |s|
       @combo_win = []
-      Deck::AVAILABLE_RANKS.reverse.each do |r|
+      Deck::RANKS.reverse.each do |r|
         @combo_win += @cards.find_all { |obj| obj.rank == r && obj.suit == s }
         if r == '10'
           @combo_win.size == 5 ? (return true) : break
@@ -124,7 +123,7 @@ class Hand
   end
 
   def find_by_card_amount(amount)
-    Deck::AVAILABLE_RANKS.reverse.each do |r|
+    Deck::RANKS.reverse.each do |r|
       cards = @cards.find_all { |obj| obj.rank == r }
       @combo_win += cards
       return { combo_bool: true, rank: r } if cards.count == amount
