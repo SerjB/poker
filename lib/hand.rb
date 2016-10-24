@@ -1,5 +1,6 @@
 require_relative 'card.rb'
-#
+# Check all combinations, return win combination
+# and print cards of it combination
 class Hand
   COMBINATIONS = [:high_card, :one_pair, :two_pairs, :three_of_a_kind,
                   :straight, :flash, :full_house, :four_of_a_kind,
