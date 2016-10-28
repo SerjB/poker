@@ -3,7 +3,7 @@ require_relative 'card.rb'
 
 #
 class Deck
-  RANKS = (('2'..'10').to_a << %w(J Q K A)).flatten
+  RANKS = (('2'..'10').to_a + %w(J Q K A)).flatten
   SUITS = %w(H S C D).freeze
 
   attr_reader :deck
