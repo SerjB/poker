@@ -27,40 +27,30 @@ class Hand
   end
 
   def high_card
-    find_by_card_amount(1)
-    true
+    find_by_card_amount(1)[:combo_bool]
   end
 
   def one_pair
-    a = find_by_card_amount(2)
-    a[:combo_bool]
+    find_by_card_amount(2)[:combo_bool]
   end
 
   def two_pairs
     a = find_by_card_amount(2)
-    if a[:combo_bool]
-      var = @combo_win
-      @cards -= var
-      b = find_by_card_amount(2)
-      @cards += var
-      b[:combo_bool]
-    else
-      a[:combo_bool]
-    end
+    return false unless a[:combo_bool]
+    @cards -= (var = @combo_win)
+    b = find_by_card_amount(2)
+    @cards += var
+    b[:combo_bool]
   end
 
   def three_of_a_kind
-    a = find_by_card_amount(3)
-    a[:combo_bool]
+    find_by_card_amount(3)[:combo_bool]
   end
 
   def straight
     RANKS_STRAIGHT.reverse.each do |r|
-      if @cards.find_all { |obj| obj.rank == r }.count > 0
-        @combo_win += @cards.find_all { |obj| obj.rank == r }.uniq(&:suit)
-      else
-        @combo_win = []
-      end
+      correct_card = @cards.find_all { |obj| obj.rank == r }
+      @combo_win = correct_card.empty? ? [] : @combo_win + correct_card
       return true if @combo_win.size == 5
     end
     false
@@ -78,31 +68,24 @@ class Hand
 
   def full_house
     a = find_by_card_amount(3)
-    if a[:combo_bool]
-      var = @combo_win
-      @cards -= var
-      b = find_by_card_amount(2)
-      @cards += var
-      b[:combo_bool]
-    else
-      a[:combo_bool]
-    end
+    return false unless a[:combo_bool]
+    var = @combo_win
+    @cards -= var
+    b = find_by_card_amount(2)
+    @cards += var
+    b[:combo_bool]
   end
 
   def four_of_a_kind
-    a = find_by_card_amount(4)
-    a[:combo_bool]
+    find_by_card_amount(4)[:combo_bool]
   end
 
   def straight_flush
     Deck::SUITS.reverse.each do |s|
       @combo_win = []
       RANKS_STRAIGHT.reverse.each do |r|
-        if @cards.find_all { |obj| obj.rank == r && obj.suit == s }.count > 0
-          @combo_win += @cards.find_all { |obj| obj.rank == r && obj.suit == s }
-        else
-          @combo_win = []
-        end
+        correct_card = @cards.find_all { |obj| obj.rank == r && obj.suit == s }
+        @combo_win = correct_card.empty? ? [] : @combo_win + correct_card
         return true if @combo_win.size == 5
       end
     end
@@ -114,9 +97,7 @@ class Hand
       @combo_win = []
       Deck::RANKS.reverse.each do |r|
         @combo_win += @cards.find_all { |obj| obj.rank == r && obj.suit == s }
-        if r == '10'
-          @combo_win.size == 5 ? (return true) : break
-        end
+        (@combo_win.size == 5 ? (return true) : break) if r == '10'
       end
     end
     false
